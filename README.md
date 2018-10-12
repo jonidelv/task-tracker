@@ -3,7 +3,7 @@
 An example for building a tray app using Electron and React.
 The app shows a timer for active tasks, you can select different tasks to keep track off.
 <br><br>
-![screenshot](/src/assets/timer.png?raw=true "Screenshot")
+![screenshot](/app/assets/timer.png?raw=true "Screenshot")
 
 ## Getting started
 
