@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
 import { ipcRenderer } from "electron";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from "./Header";
 import TasksIndex from "./TasksIndex";
@@ -12,11 +12,7 @@ const APP_DATA = JSON.parse(localStorage.getItem("__INITIAL_STATE__"));
 
 const INITIAL_STATE = {
   tasks: [
-    { id: 1, task: "Build App1", totalTime: 10 },
-    { id: 2, task: "Build App2", totalTime: 60 },
-    { id: 3, task: "Build App3", totalTime: 1000 },
-    { id: 4, task: "Build App4", totalTime: 10000 },
-    { id: 5, task: "Build App5", totalTime: 100000 }
+    { id: 1, task: "Example task", totalTime: 10 },
   ],
   activeTask: null,
   timer: {
@@ -165,48 +161,50 @@ class App extends Component {
   render() {
     const { tasks, activeTask, timer } = this.state;
     return (
-      <div>
-        <Header />
-        <div className="container" style={styles.container}>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <TasksIndex
-                  activeTask={activeTask}
-                  onTaskDeactivate={this.handleDeactivation}
-                  onTimerStart={this.handleTimerStart}
-                  onTimerStop={this.handleTimerStop}
-                  timer={timer}
-                />
-              )}
-            />
-            <Route
-              path="/tasks"
-              render={() => (
-                <TasksShow
-                  tasks={tasks}
-                  activeTask={activeTask}
-                  createTask={this.createTask}
-                  deleteTask={this.deleteTask}
-                  onTaskActivate={this.handleActivation}
-                />
-              )}
-            />
-            <Route
-              path="/settings"
-              render={() => (
-                <Settings
-                  timer={timer}
-                  handleSubmit={this.handleSettingsUpdate}
-                  handleDataReset={this.handleDataReset}
-                />
-              )}
-            />
-          </Switch>
+      <Router>
+        <div>
+          <Header />
+          <div className="container" style={styles.container}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <TasksIndex
+                    activeTask={activeTask}
+                    onTaskDeactivate={this.handleDeactivation}
+                    onTimerStart={this.handleTimerStart}
+                    onTimerStop={this.handleTimerStop}
+                    timer={timer}
+                  />
+                )}
+              />
+              <Route
+                path="/tasks"
+                render={() => (
+                  <TasksShow
+                    tasks={tasks}
+                    activeTask={activeTask}
+                    createTask={this.createTask}
+                    deleteTask={this.deleteTask}
+                    onTaskActivate={this.handleActivation}
+                  />
+                )}
+              />
+              <Route
+                path="/settings"
+                render={() => (
+                  <Settings
+                    timer={timer}
+                    handleSubmit={this.handleSettingsUpdate}
+                    handleDataReset={this.handleDataReset}
+                  />
+                )}
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

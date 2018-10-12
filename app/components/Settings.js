@@ -36,12 +36,12 @@ class Settings extends Component {
     return (
       <div style={styles.container}>
         <ul className="collection with-header">
-          <li className="collection-header">
+          <li className="collection-header settings">
             Settings
           </li>
           <form onSubmit={this.onSubmit}>
-            <li className="collection-item">
-              <p>Initial Duration</p>
+            <li className="collection-item less">
+              <p className="item-bigg">Initial Duration</p>
               <input
                 type="number"
                 min="1"
@@ -49,8 +49,8 @@ class Settings extends Component {
                 onChange={e => this.setState({ time: e.target.value })}
               />
             </li>
-            <li className="collection-item">
-              <p>Units</p>
+            <li className="collection-item less">
+              <p className="item-bigg">Units</p>
               <select
                 className="browser-default"
                 value={this.state.unit}
@@ -61,12 +61,12 @@ class Settings extends Component {
                 <option value="hours">Hours</option>
               </select>
             </li>
-            <li className="collection-item right">
-              <button type="submit" className={this.buttonStyle()}>Save</button>
+            <li className="collection-item less right" style={{ width: '110%'}}>
+              <button type="submit" className={this.buttonStyle()} style={{ width: '110%' }}>Save</button>
             </li>
           </form>
         </ul>
-        <button className="btn red" onClick={this.props.handleDataReset}>
+        <button className="btn red btn-less" onClick={this.props.handleDataReset}>
           Reset Data
         </button>
       </div>
