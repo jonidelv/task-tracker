@@ -58,8 +58,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "TaskTracker",
+    "appId": "com.jonidelv.TaskTracker",
     "files": [
       "dist/",
       "node_modules/",

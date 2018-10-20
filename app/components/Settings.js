@@ -22,14 +22,14 @@ class Settings extends Component {
 
     if (time == propsTime && unit == propsUnit) {
       // double equals to avoid type check
-      return "btn disabled";
+      return "btn green disabled";
     }
 
     if (this.props.timer.active) {
-      return "btn disabled";
+      return "btn green disabled";
     }
 
-    return "btn";
+    return "btn green";
   };
 
   render() {
@@ -66,7 +66,7 @@ class Settings extends Component {
             </li>
           </form>
         </ul>
-        <button className="btn red btn-less" onClick={this.props.handleDataReset}>
+        <button className="btn nav-wrapper btn-less" onClick={this.props.handleDataReset}>
           Reset Data
         </button>
       </div>

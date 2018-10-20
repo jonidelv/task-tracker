@@ -10,7 +10,7 @@
  *
  * @flow
  */
-import { app, BrowserWindow, ipcMain, Tray, Menu } from 'electron';
+import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage } from 'electron';
 import MenuBuilder from './menu';
 
 const path = require('path');
@@ -55,7 +55,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', async () => {
-  app.dock.hide();
+  // app.dock.hide();
   if (
     process.env.NODE_ENV === 'development' ||
     process.env.DEBUG_PROD === 'true'
@@ -68,14 +68,18 @@ app.on('ready', async () => {
     width: 300,
     frame: false,
     resizable: false,
-    show: false,
+    show: true,
     webPreferences: { backgroundThrottling: false }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.on('blur', () => {
-    mainWindow.hide();
+    if (
+      process.env.NODE_ENV === 'development'
+    ) {
+      mainWindow.hide();
+    }
   });
 
   // @TODO: Use 'ready-to-show' event
@@ -100,9 +104,10 @@ app.on('ready', async () => {
   menuBuilder.buildMenu();
 
   const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
-  const iconPath = path.join(__dirname, `./assets/${iconName}`);
-
-  tray = new Tray(iconPath);
+  const image = nativeImage.createFromPath(
+    path.join(__dirname, '..', `${iconName}`)
+  );
+  tray = new Tray(image);
   tray.mainWindow = mainWindow
   tray.setToolTip('Timer App');
 
@@ -110,7 +115,7 @@ app.on('ready', async () => {
     // Click event bounds
     const { x, y } = bounds;
 
-    // Window height and width
+    // Window height and width`
     const { height, width } = mainWindow.getBounds();
 
     if (mainWindow.isVisible()) {
