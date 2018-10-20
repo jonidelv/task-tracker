@@ -1,7 +1,7 @@
 {
   "name": "focustimeapp",
   "productName": "focustimeapp",
-  "version": "0.16.0",
+  "version": "0.1.0",
   "description": "React Native pomodoro ⏱ App",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
